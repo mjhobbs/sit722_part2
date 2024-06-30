@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from typing import List
 import os
 
-from app.models import BookBase, BookCreate, BookUpdate, BookInDB
+from .models import BookBase, BookCreate, BookUpdate, BookInDB
 
 # PostgreSQL database connection string (replace with your PostgreSQL connection string)
 DATABASE_URL = os.environ.get('DATABASE_URL')
