@@ -4,11 +4,11 @@ from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
 from typing import List
 import os
-
-from .models import BookBase, BookCreate, BookUpdate, BookInDB
+from pydantic import BaseModel
+from typing import Optional
 
 # PostgreSQL database connection string (replace with your PostgreSQL connection string)
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL') or "postgresql://admin:E5OJuKRE14iotwfsvHwJeqsjaKK1eKmO@dpg-cq0nb2aju9rs73b0500g-a.oregon-postgres.render.com/part2"
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -36,6 +36,25 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+class BookBase(BaseModel):
+    title: str
+    author: str
+    year: int
+
+class BookCreate(BookBase):
+    pass
+
+class BookUpdate(BookBase):
+    pass
+
+class BookInDB(BookBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
 
 # Endpoint to create a new book
 @app.post("/books/", response_model=BookInDB)
