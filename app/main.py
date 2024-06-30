@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 # PostgreSQL database connection string (replace with your PostgreSQL connection string)
-DATABASE_URL = os.environ.get('DATABASE_URL') or "postgresql://admin:E5OJuKRE14iotwfsvHwJeqsjaKK1eKmO@dpg-cq0nb2aju9rs73b0500g-a.oregon-postgres.render.com/part2"
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # Initialize FastAPI app
 app = FastAPI()
